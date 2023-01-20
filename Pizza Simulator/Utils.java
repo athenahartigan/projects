@@ -50,7 +50,7 @@ public class Utils {
             System.out.println("Dominos: No ratings yet");
         }
         else{
-            System.out.printf("Dominos: %.2f\n", ratingAvgPapa);
+            System.out.printf("Dominos: %.2f\n", ratingAvgDomino);
         }
     }
     /**
@@ -160,4 +160,3 @@ public class Utils {
 
     }
 }
-
