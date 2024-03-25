@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Insta Followers</title>
+	<link rel="shortcut icon" href="/assets/favicon.ico">
+	<link rel="stylesheet" href="instaMain.css">
+</head>
+
+<body>
+	<div id="video-container" class="vertical-center">
+        <!-- Video container -->
+        <div class="how_to">
+            <!-- Video element -->
+            <video id="instaVideo" width="320" height="240" controls>
+                <source src="InstaMovie.mp4" type="video/mp4" id="videoSource">
+            </video>
+        </div>
+		<!-- Drop zone -->
+		<div class="drop-zone" id="dropZone">
+            <span class="drop-zone__prompt">Drop files here or click to upload</span>
+            <input type="file" name="myFile" class="drop-zone__input" id="fileInput">
+        </div>
+	</div>
+
+	<!-- User list container (hidden initially) -->
+    <div id="userListContainer" style="display: none;">
+		<h2>NonFollowers</h2>
+        <ul id="userList"></ul>
+    </div>
+
+	<script src="instaMain.js"></script>
+</body>
