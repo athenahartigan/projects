@@ -1,5 +1,7 @@
 # Projects
 
+# Resume Link: https://athenahartigan.github.io/
+
 # Instagram Followers App Link: https://athenahartigan.github.io/nonfollowers
 
 # Quiz App Link: https://athenahartigan.github.io/quiz
