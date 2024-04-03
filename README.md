@@ -6,6 +6,8 @@
 
 # Connect Four Link: https://athenahartigan.github.io/connectfour
 
+<img width="717" alt="Instagram App Photo" src="https://github.com/athenahartigan/Projects/assets/89394698/772c0afb-8fb8-46d9-81d3-d47a6b8f0173">
+
 <img width="1440" alt="Screen Shot 2023-01-19 at 10 24 32 PM" src="https://user-images.githubusercontent.com/89394698/213611327-29f51484-d4ca-4bc4-9ace-d52751377fb0.png">
 
 <img width="349" alt="Screenshot 2023-10-24 at 7 09 02 PM" src="https://github.com/athenahartigan/Projects/assets/89394698/3c22a3a3-8b88-47a6-8f32-00a8ef99ddc7">
