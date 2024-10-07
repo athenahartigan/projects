@@ -72,7 +72,7 @@ function displayUserList() {
             const usersNotFollowingBack = notFollowBackHashmap(followersContent, usernameLinkHashmap);
 
             // Clear video and drop zone
-            document.getElementById("video-container").style.display = "none";
+            document.querySelector(".video-container").style.display = "none";
             dropZone.style.display = "none";
             userListContainer.style.display = "block";
 
