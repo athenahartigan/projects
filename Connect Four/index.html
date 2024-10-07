@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Connect Four!!!!</title>
+    <style></style>
+</head>
+<body>
+
+
+<script>
+  let body = document.body;
+  body.style.backgroundColor = "rgb(239, 255, 232)";
+
+  let blueScore = 0;
+  let redScore = 0;
+  let turn = "red";
+  let blueSpaces = [];
+  let redSpaces = [];
+  let allSpaces = [];
+  let gameOver = 0;
+
+  function reset() {
+    turn = "red";
+    blueSpaces = [];
+    redSpaces = [];
+    allSpaces = [];
+    createBoard();
+    gameOver = 0;
+    if(document.getElementById("winP")) {
+      body.removeChild(document.getElementById("winP"));
+    }
+    body.style.backgroundColor = "rgb(239, 255, 232)";
+    body.style.backgroundImage = "";
+  }
+
+  let blueP = document.createElement("p");
+  body.appendChild(blueP);
+  blueP.style.fontSize = "20pt";
+  blueP.style.color = "blue";
+
+  let redP = document.createElement("p");
+  body.appendChild(redP);
+  redP.style.fontSize = "20pt";
+  redP.style.color = "red";
+
+  function updateScore() {
+    blueP.innerHTML = `Blue Score: ${blueScore}`;
+    redP.innerHTML = `Red Score: ${redScore}`;
+  }
+
+  updateScore();
+
+  let button = document.createElement("button");
+
+  body.appendChild(button);
+  button.innerHTML = "Play New Game";
+  button.style.fontSize = "20pt";
+  button.addEventListener("click", reset);
+  button.style.backgroundColor = "rgb(244, 232, 255)";
+  button.style.border = "3px solid rgb(218, 200, 247)";
+  button.style.color = "rgb(22, 1, 69)";
+
+  let space = document.createElement("space");
+  body.appendChild(space);
+  space.innerHTML = "<br><br><br>";
+
+  function createBoard() {
+    if(document.getElementById("board")){
+      body.removeChild(document.getElementById("board"));
+    }
+
+    let board = document.createElement("table");
+    body.appendChild(board);
+    board.id = "board";
+    board.style.borderSpacing = "10px"
+    board.style.margin = "auto";
+    board.style.backgroundColor = "#FDFD96";
+    board.style.border = "5px solid gold";
+    board.style.borderRadius = "2%";
+
+    let id = 1;
+    for(let i = 0; i < 6; i++) {
+      let row = document.createElement("tr");
+      board.appendChild(row);
+
+      for(let j = 0; j < 7; j++) {
+        let col = document.createElement("td");
+        row.appendChild(col);
+        col.style.border = "4px solid #FFFDD0";
+        col.style.backgroundColor = "rgb(245, 234, 116)";
+        col.style.height = "100px";
+        col.style.width = "100px";
+        col.style.borderRadius = "100%";
+        col.id=id;
+        //col.innerHTML = id;
+
+        id++;
+        col.addEventListener("click", playPiece);
+      }
+    }
+  }
+
+  var playPiece = function() {
+    if (gameOver === 0) {
+			var x = parseInt(this.id) % 7; //column
+		  if (x === 0) {
+		    x = 7
+		  }
+			for(var i=0;i<6;i++) {
+				var y = document.getElementById(""+(x+35-7*i))
+        //this is used to find empty spaces below a clicked space
+
+        if(y.style.backgroundColor == "rgb(245, 234, 116)") {
+      	  if (turn === "red") {
+            y.style.backgroundColor = "rgb(255, 189, 189)";
+            redSpaces.push(y.id);
+            allSpaces.push(y.id);
+            checkWinner(redSpaces);
+            checkTie(allSpaces);
+            turn = "blue";
+            break;
+          } else if (turn === "blue") {
+            y.style.backgroundColor = "rgb(189, 239, 255)";
+            blueSpaces.push(y.id);
+            allSpaces.push(y.id);
+            checkWinner(blueSpaces);
+            checkTie(allSpaces);
+            turn = "red";
+            break;
+          }
+        }
+      }
+    }
+  }
+
+  function checkWinner(arr) {
+   if(
+      //Rows
+      arr.indexOf("1") != -1 && arr.indexOf("2") != -1 && arr.indexOf("3") != -1 && arr.indexOf("4") != -1 ||
+
+      arr.indexOf("8") != -1 && arr.indexOf("9") != -1 && arr.indexOf("10") != -1 && arr.indexOf("11") != -1 ||
+
+      arr.indexOf("15") != -1 && arr.indexOf("16") != -1 && arr.indexOf("17") != -1 && arr.indexOf("18") != -1 ||
+
+      arr.indexOf("22") != -1 && arr.indexOf("23") != -1 && arr.indexOf("24") != -1 && arr.indexOf("25") != -1 ||
+
+      arr.indexOf("29") != -1 && arr.indexOf("30") != -1 && arr.indexOf("31") != -1 && arr.indexOf("32") != -1 ||
+
+      arr.indexOf("36") != -1 && arr.indexOf("37") != -1 && arr.indexOf("38") != -1 && arr.indexOf("39") != -1 ||
+
+
+      arr.indexOf("2") != -1 && arr.indexOf("3") != -1 && arr.indexOf("4") != -1 && arr.indexOf("5") != -1 ||
+
+      arr.indexOf("9") != -1 && arr.indexOf("10") != -1 && arr.indexOf("11") != -1 && arr.indexOf("12") != -1 ||
+
+      arr.indexOf("16") != -1 && arr.indexOf("17") != -1 && arr.indexOf("18") != -1 && arr.indexOf("19") != -1 ||
+
+      arr.indexOf("23") != -1 && arr.indexOf("24") != -1 && arr.indexOf("25") != -1 && arr.indexOf("26") != -1 ||
+
+      arr.indexOf("30") != -1 && arr.indexOf("31") != -1 && arr.indexOf("32") != -1 && arr.indexOf("33") != -1 ||
+
+      arr.indexOf("37") != -1 && arr.indexOf("38") != -1 && arr.indexOf("39") != -1 && arr.indexOf("40") != -1 ||
+
+
+      arr.indexOf("3") != -1 && arr.indexOf("4") != -1 && arr.indexOf("5") != -1 && arr.indexOf("6") != -1 ||
+
+      arr.indexOf("10") != -1 && arr.indexOf("11") != -1 && arr.indexOf("12") != -1 && arr.indexOf("13") != -1 ||
+
+      arr.indexOf("17") != -1 && arr.indexOf("18") != -1 && arr.indexOf("19") != -1 && arr.indexOf("20") != -1 ||
+
+      arr.indexOf("24") != -1 && arr.indexOf("25") != -1 && arr.indexOf("26") != -1 && arr.indexOf("27") != -1 ||
+
+      arr.indexOf("31") != -1 && arr.indexOf("32") != -1 && arr.indexOf("33") != -1 && arr.indexOf("34") != -1 ||
+
+      arr.indexOf("38") != -1 && arr.indexOf("39") != -1 && arr.indexOf("40") != -1 && arr.indexOf("41") != -1 ||
+
+
+      arr.indexOf("4") != -1 && arr.indexOf("5") != -1 && arr.indexOf("6") != -1 && arr.indexOf("7") != -1 ||
+
+      arr.indexOf("11") != -1 && arr.indexOf("12") != -1 && arr.indexOf("13") != -1 && arr.indexOf("14") != -1 ||
+
+      arr.indexOf("18") != -1 && arr.indexOf("19") != -1 && arr.indexOf("20") != -1 && arr.indexOf("21") != -1 ||
+
+      arr.indexOf("25") != -1 && arr.indexOf("26") != -1 && arr.indexOf("27") != -1 && arr.indexOf("28") != -1 ||
+
+      arr.indexOf("32") != -1 && arr.indexOf("33") != -1 && arr.indexOf("34") != -1 && arr.indexOf("35") != -1 ||
+
+      arr.indexOf("39") != -1 && arr.indexOf("40") != -1 && arr.indexOf("41") != -1 && arr.indexOf("42") != -1 ||
+
+
+
+      //columns
+      arr.indexOf("1") != -1 && arr.indexOf("8") != -1 && arr.indexOf("15") != -1 && arr.indexOf("22") != -1 ||
+
+      arr.indexOf("8") != -1 && arr.indexOf("15") != -1 && arr.indexOf("22") != -1 && arr.indexOf("29") != -1 ||
+
+      arr.indexOf("15") != -1 && arr.indexOf("22") != -1 && arr.indexOf("29") != -1 && arr.indexOf("36") != -1 ||
+
+
+      arr.indexOf("2") != -1 && arr.indexOf("9") != -1 && arr.indexOf("16") != -1 && arr.indexOf("23") != -1 ||
+
+      arr.indexOf("9") != -1 && arr.indexOf("16") != -1 && arr.indexOf("23") != -1 && arr.indexOf("30") != -1 ||
+
+      arr.indexOf("16") != -1 && arr.indexOf("23") != -1 && arr.indexOf("30") != -1 && arr.indexOf("37") != -1 ||
+
+
+      arr.indexOf("3") != -1 && arr.indexOf("10") != -1 && arr.indexOf("17") != -1 && arr.indexOf("24") != -1 ||
+
+      arr.indexOf("10") != -1 && arr.indexOf("17") != -1 && arr.indexOf("24") != -1 && arr.indexOf("31") != -1 ||
+
+      arr.indexOf("17") != -1 && arr.indexOf("24") != -1 && arr.indexOf("31") != -1 && arr.indexOf("38") != -1 ||
+
+
+      arr.indexOf("4") != -1 && arr.indexOf("11") != -1 && arr.indexOf("18") != -1 && arr.indexOf("25") != -1 ||
+
+      arr.indexOf("11") != -1 && arr.indexOf("18") != -1 && arr.indexOf("25") != -1 && arr.indexOf("32") != -1 ||
+
+      arr.indexOf("18") != -1 && arr.indexOf("25") != -1 && arr.indexOf("32") != -1 && arr.indexOf("39") != -1 ||
+
+
+      arr.indexOf("5") != -1 && arr.indexOf("12") != -1 && arr.indexOf("19") != -1 && arr.indexOf("26") != -1 ||
+
+      arr.indexOf("12") != -1 && arr.indexOf("19") != -1 && arr.indexOf("26") != -1 && arr.indexOf("33") != -1 ||
+
+      arr.indexOf("19") != -1 && arr.indexOf("26") != -1 && arr.indexOf("33") != -1 && arr.indexOf("40") != -1 ||
+
+
+      arr.indexOf("6") != -1 && arr.indexOf("13") != -1 && arr.indexOf("20") != -1 && arr.indexOf("27") != -1 ||
+
+      arr.indexOf("13") != -1 && arr.indexOf("20") != -1 && arr.indexOf("27") != -1 && arr.indexOf("34") != -1 ||
+
+      arr.indexOf("20") != -1 && arr.indexOf("27") != -1 && arr.indexOf("34") != -1 && arr.indexOf("41") != -1 ||
+
+
+      arr.indexOf("7") != -1 && arr.indexOf("14") != -1 && arr.indexOf("21") != -1 && arr.indexOf("28") != -1 ||
+
+      arr.indexOf("14") != -1 && arr.indexOf("21") != -1 && arr.indexOf("28") != -1 && arr.indexOf("35") != -1 ||
+
+      arr.indexOf("21") != -1 && arr.indexOf("28") != -1 && arr.indexOf("35") != -1 && arr.indexOf("42") != -1 ||
+
+
+
+      //Diuagnol (-slope)
+      arr.indexOf("15") != -1 && arr.indexOf("23") != -1 && arr.indexOf("31") != -1 && arr.indexOf("39") != -1 ||
+
+
+      arr.indexOf("8") != -1 && arr.indexOf("16") != -1 && arr.indexOf("24") != -1 && arr.indexOf("32") != -1 ||
+
+      arr.indexOf("16") != -1 && arr.indexOf("24") != -1 && arr.indexOf("32") != -1 && arr.indexOf("40") != -1 ||
+
+
+      arr.indexOf("1") != -1 && arr.indexOf("9") != -1 && arr.indexOf("17") != -1 && arr.indexOf("25") != -1 ||
+
+      arr.indexOf("9") != -1 && arr.indexOf("17") != -1 && arr.indexOf("25") != -1 && arr.indexOf("33") != -1 ||
+
+      arr.indexOf("17") != -1 && arr.indexOf("25") != -1 && arr.indexOf("33") != -1 && arr.indexOf("41") != -1 ||
+
+
+      arr.indexOf("2") != -1 && arr.indexOf("10") != -1 && arr.indexOf("18") != -1 && arr.indexOf("26") != -1 ||
+
+      arr.indexOf("10") != -1 && arr.indexOf("18") != -1 && arr.indexOf("26") != -1 && arr.indexOf("34") != -1 ||
+
+      arr.indexOf("18") != -1 && arr.indexOf("26") != -1 && arr.indexOf("34") != -1 && arr.indexOf("42") != -1 ||
+
+
+      arr.indexOf("3") != -1 && arr.indexOf("11") != -1 && arr.indexOf("19") != -1 && arr.indexOf("27") != -1 ||
+
+      arr.indexOf("11") != -1 && arr.indexOf("19") != -1 && arr.indexOf("27") != -1 && arr.indexOf("35") != -1 ||
+
+
+      arr.indexOf("4") != -1 && arr.indexOf("12") != -1 && arr.indexOf("20") != -1 && arr.indexOf("28") != -1 ||
+
+
+
+      //Diagnol (+Slope)
+      arr.indexOf("4") != -1 && arr.indexOf("10") != -1 && arr.indexOf("16") != -1 && arr.indexOf("22") != -1 ||
+
+
+      arr.indexOf("5") != -1 && arr.indexOf("11") != -1 && arr.indexOf("17") != -1 && arr.indexOf("23") != -1 ||
+
+      arr.indexOf("11") != -1 && arr.indexOf("17") != -1 && arr.indexOf("23") != -1 && arr.indexOf("29") != -1 ||
+
+
+      arr.indexOf("6") != -1 && arr.indexOf("12") != -1 && arr.indexOf("18") != -1 && arr.indexOf("24") != -1 ||
+
+      arr.indexOf("12") != -1 && arr.indexOf("18") != -1 && arr.indexOf("24") != -1 && arr.indexOf("30") != -1 ||
+
+      arr.indexOf("18") != -1 && arr.indexOf("24") != -1 && arr.indexOf("30") != -1 && arr.indexOf("36") != -1 ||
+
+
+      arr.indexOf("7") != -1 && arr.indexOf("13") != -1 && arr.indexOf("19") != -1 && arr.indexOf("25") != -1 ||
+
+      arr.indexOf("13") != -1 && arr.indexOf("19") != -1 && arr.indexOf("25") != -1 && arr.indexOf("31") != -1 ||
+
+      arr.indexOf("19") != -1 && arr.indexOf("25") != -1 && arr.indexOf("31") != -1 && arr.indexOf("37") != -1 ||
+
+
+      arr.indexOf("14") != -1 && arr.indexOf("20") != -1 && arr.indexOf("26") != -1 && arr.indexOf("32") != -1 ||
+
+      arr.indexOf("20") != -1 && arr.indexOf("26") != -1 && arr.indexOf("32") != -1 && arr.indexOf("38") != -1 ||
+
+
+      arr.indexOf("21") != -1 && arr.indexOf("27") != -1 && arr.indexOf("33") != -1 && arr.indexOf("39") != -1
+    ) {
+      let winP = document.createElement("p");
+      body.appendChild(winP);
+      winP.innerHTML = `Congrats ${turn}, you won!!!!`;
+      winP.innerHTML = winP.innerHTML.toUpperCase();
+      winP.style.fontSize = "30pt";
+      winP.style.textAlign = "center";
+      winP.id = "winP";
+
+      if(turn === "red") {
+        redScore++
+        body.style.backgroundColor = "rgb(255, 189, 189)";
+        body.style.backgroundImage = "url('https://media.giphy.com/media/Ah3aXWDIt2U6a3RiEE/giphy.gif')";
+        winP.style.color = "red";
+      } else {
+        blueScore++
+        body.style.backgroundColor = "rgb(189, 239, 255)";
+        body.style.backgroundImage = "url('https://media.giphy.com/media/d69S0r0bUCcBjoVNfZ/giphy.gif')";
+        winP.style.color = "blue";
+      }
+      updateScore();
+      gameOver = 1;
+
+    }
+  }
+    function checkTie(arr){
+      if(
+      arr.indexOf("1") != -1 && arr.indexOf("2") != -1 && arr.indexOf("3") != -1 && arr.indexOf("4") != -1 &&
+
+      arr.indexOf("5") != -1 && arr.indexOf("6") != -1 && arr.indexOf("7") != -1 && arr.indexOf("8") != -1 &&
+
+      arr.indexOf("9") != -1 && arr.indexOf("10") != -1 && arr.indexOf("11") != -1 && arr.indexOf("12") != -1 &&
+
+      arr.indexOf("13") != -1 && arr.indexOf("14") != -1 && arr.indexOf("15") != -1 && arr.indexOf("16") != -1 &&
+
+      arr.indexOf("17") != -1 && arr.indexOf("18") != -1 && arr.indexOf("19") != -1 && arr.indexOf("20") != -1 &&
+
+      arr.indexOf("21") != -1 && arr.indexOf("22") != -1 && arr.indexOf("23") != -1 && arr.indexOf("24") != -1 &&
+
+      arr.indexOf("25") != -1 && arr.indexOf("26") != -1 && arr.indexOf("27") != -1 && arr.indexOf("28") != -1 &&
+
+      arr.indexOf("29") != -1 && arr.indexOf("30") != -1 && arr.indexOf("31") != -1 && arr.indexOf("32") != -1 &&
+
+      arr.indexOf("33") != -1 && arr.indexOf("34") != -1 && arr.indexOf("35") != -1 && arr.indexOf("36") != -1 &&
+
+      arr.indexOf("37") != -1 && arr.indexOf("38") != -1 && arr.indexOf("39") != -1 && arr.indexOf("40") != -1 &&
+
+      arr.indexOf("41") != -1 && arr.indexOf("42") ){
+        let winP = document.createElement("p");
+        body.appendChild(winP);
+        winP.innerHTML = `Tie, play again!`;
+        winP.innerHTML = winP.innerHTML.toUpperCase();
+        winP.style.fontSize = "30pt";
+        winP.style.textAlign = "center";
+        winP.id = "winP";
+        body.style.backgroundColor = "rgb(243, 225, 255)";
+        body.style.backgroundImage = "url('https://media0.giphy.com/media/WNJATm9pwnjpjI1i0g/giphy.gif?cid=ecf05e4746473e3182a5b2b30b9f88b4684089f5d0252bcc&rid=giphy.gif&ct=s')";
+        winP.style.color = "purple";
+        gameOver = 1;
+      }
+    }
+
+</script>
+</body>
+
+</html>
