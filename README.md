@@ -8,7 +8,7 @@
 
 # Connect Four Link: https://athenahartigan.github.io/connectfour
 
-# Deacon Multiply Link: https://athenahartigan.github.io/deacon-multiply
+# Deacon Multiply Link (click): https://athenahartigan.github.io/deacon-multiply
 
 <img width="1722" alt="Screenshot 2024-04-02 at 11 25 17 PM" src="https://github.com/athenahartigan/Projects/assets/89394698/a1ac7ff5-3083-49c0-b16f-19189f0bee46">
 
