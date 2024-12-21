@@ -4,7 +4,7 @@
 
 # Pediatric Labeling Changes Database Link: https://github.com/athenahartigan/pediatric-labeling-changes
 
-# Music Recommender Link: https://github.com/athenahartigan/music-recommender/blob/main/README.md
+# Music Recommender Link: https://github.com/athenahartigan/music-recommender
 
 # Instagram Followers App Link: https://athenahartigan.github.io/nonfollowers
 
