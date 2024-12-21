@@ -2,6 +2,10 @@
 
 # Resume Link: https://athenahartigan.github.io
 
+# Pediatric Labeling Changes Database Link: https://github.com/athenahartigan/pediatric-labeling-changes
+
+# Music Recommender Link: https://github.com/athenahartigan/music-recommender/blob/main/README.md
+
 # Instagram Followers App Link: https://athenahartigan.github.io/nonfollowers
 
 # Quiz App Link: https://athenahartigan.github.io/quiz
