@@ -1,0 +1,7 @@
+pandas
+matplotlib
+requests
+seaborn
+rdkit
+pycountry
+pubchempy
